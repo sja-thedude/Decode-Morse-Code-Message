@@ -1,4 +1,4 @@
-Morse_Decode = {
+MORSE_DECODE = {
   '.-' => 'a',
   '-...' => 'b',
   '-.-.' => 'c',
@@ -27,11 +27,11 @@ Morse_Decode = {
   '--..' => 'z'
 }.freeze
 
-def decode_word(x)
+def decode_word(code)
   result = ''
-  x = x.split
-  x.each do |key|
-    result += Morse_Decode[key]
+  code = code.split
+  code.each do |key|
+    result += MORSE_DECODE[key]
   end
   result.upcase
 end
@@ -41,7 +41,7 @@ def decode(str)
   str.strip.tr('/', ' ').split('  ').each do |n|
     arr = []
     n.split.each do |t|
-      arr.push(Morse_Decode[t])
+      arr.push(MORSE_DECODE[t])
     end
     result += "#{arr.join} "
   end
@@ -52,4 +52,4 @@ puts decode_word('.-')
 puts decode_word('-- -.--')
 puts decode('      .-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-. / .-. ..- -... .. . ...')
 puts decode('-- -.--   -. .- -- .  .. ...  ... .--- .-')
-puts decode('-. .- -- .  --- ..-.  -- -.--  -.-. --- -.. .. -. --.  .--. .- .-. - -. . .-.  .. ...  --. --- .-. -.. --- -.')
+puts decode('-.-. --- -.. .. -. --.  .--. .- .-. - -. . .-.  .. ...  --. --- .-. -.. --- -.')
