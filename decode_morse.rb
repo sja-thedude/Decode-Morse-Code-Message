@@ -1,55 +1,44 @@
-MORSE_DECODE = {
-  '.-' => 'a',
-  '-...' => 'b',
-  '-.-.' => 'c',
-  '-..' => 'd',
-  '.' => 'e',
-  '..-.' => 'f',
-  '--.' => 'g',
-  '....' => 'h',
-  '..' => 'i',
-  '.---' => 'j',
-  '-.-' => 'k',
-  '.-..' => 'l',
-  '--' => 'm',
-  '-.' => 'n',
-  '---' => 'o',
-  '.--.' => 'p',
-  '--.-' => 'q',
-  '.-.' => 'r',
-  '...' => 's',
-  '-' => 't',
-  '..-' => 'u',
-  '...-' => 'v',
-  '.--' => 'w',
-  '-..-' => 'x',
-  '-.--' => 'y',
-  '--..' => 'z'
-}.freeze
-
-def decode_word(code)
-  result = ''
-  code = code.split
-  code.each do |key|
-    result += MORSE_DECODE[key]
+def decode_char(char)
+  @morse_decode = { '.-' => 'A', '-...' => 'B', '-.-.' => 'C', '-..' => 'D',
+                  '.' => 'E', '..-.' => 'F', '--.' => 'G', '....' => 'H',
+                  '..' => 'I', '.---' => 'J', '-.-' => 'K', '.-..' => 'L',
+                  '--' => 'M', '-.' => 'N', '---' => 'O', '.--.' => 'P',
+                  '--.-' => 'Q', '.-.' => 'R', '...' => 'S', '-' => 'T',
+                  '..-' => 'U', '...-' => 'v', '.--' => 'W', '-..-' => 'X',
+                  '-.--' => 'Y', '--..' => 'Z' }
+  @morse_decode.each do |key, value|
+    return value if key == char
   end
-  result.upcase
 end
 
-def decode(str)
-  result = ''
-  str.strip.tr('/', ' ').split('  ').each do |n|
-    arr = []
-    n.split.each do |t|
-      arr.push(MORSE_DECODE[t])
+def decode_word(word)
+  char_new = ''
+  full_word = ''
+  word = word.split
+  word.each do |letter|
+    char_new = if letter.to_s == '/'
+      ' '
+    else
+      decode_char(letter.to_s)
     end
-    result += "#{arr.join} "
+full_word += char_new
+end
+full_word
+end
+
+def decode(msg)
+  word_new = ''
+  full_msg = ''
+  msg_split = msg.split('   ')
+  msg_split.each do |word|
+    word_new = decode_word(word)
+    full_msg += "#{word_new} "
   end
-  result.upcase
+  puts full_msg
 end
 
 puts decode_word('.-')
 puts decode_word('-- -.--')
 puts decode('      .-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-. / .-. ..- -... .. . ...')
-puts decode('-- -.--   -. .- -- .  .. ...  ... .--- .-')
-puts decode('-.-. --- -.. .. -. --.  .--. .- .-. - -. . .-.  .. ...  --. --- .-. -.. --- -.')
+puts decode('-- -.--   -. .- -- .   .. ...   ... .--- .-')
+puts decode('-.-. --- -.. .. -. --.   .--. .- .-. - -. . .-.   .. ...   --. --- .-. -.. --- -.')
