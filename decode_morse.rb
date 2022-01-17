@@ -1,11 +1,11 @@
 def decode_char(char)
   @morse_decode = { '.-' => 'A', '-...' => 'B', '-.-.' => 'C', '-..' => 'D',
-                  '.' => 'E', '..-.' => 'F', '--.' => 'G', '....' => 'H',
-                  '..' => 'I', '.---' => 'J', '-.-' => 'K', '.-..' => 'L',
-                  '--' => 'M', '-.' => 'N', '---' => 'O', '.--.' => 'P',
-                  '--.-' => 'Q', '.-.' => 'R', '...' => 'S', '-' => 'T',
-                  '..-' => 'U', '...-' => 'v', '.--' => 'W', '-..-' => 'X',
-                  '-.--' => 'Y', '--..' => 'Z' }
+                    '.' => 'E', '..-.' => 'F', '--.' => 'G', '....' => 'H',
+                    '..' => 'I', '.---' => 'J', '-.-' => 'K', '.-..' => 'L',
+                    '--' => 'M', '-.' => 'N', '---' => 'O', '.--.' => 'P',
+                    '--.-' => 'Q', '.-.' => 'R', '...' => 'S', '-' => 'T',
+                    '..-' => 'U', '...-' => 'V', '.--' => 'W', '-..-' => 'X',
+                    '-.--' => 'Y', '--..' => 'Z' }
   @morse_decode.each do |key, value|
     return value if key == char
   end
@@ -17,13 +17,13 @@ def decode_word(word)
   word = word.split
   word.each do |letter|
     char_new = if letter.to_s == '/'
-      ' '
-    else
-      decode_char(letter.to_s)
-    end
-full_word += char_new
-end
-full_word
+                 ' '
+               else
+                 decode_char(letter.to_s)
+               end
+    full_word += char_new
+  end
+  full_word
 end
 
 def decode(msg)
